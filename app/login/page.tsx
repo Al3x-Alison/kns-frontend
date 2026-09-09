@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
+import { AlertCircleIcon } from "@/components/ui/icons";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -45,43 +47,62 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+    <div className="relative flex min-h-screen items-center justify-center bg-background px-4">
+      <div className="absolute right-4 top-4">
+        <ThemeToggle />
+      </div>
+
       <form
         onSubmit={handleSubmit}
-        className="bg-white p-8 rounded-lg shadow-md w-full max-w-sm"
+        className="w-full max-w-sm rounded-2xl border border-border bg-surface p-8 shadow-sm"
       >
-        <h1 className="text-xl font-semibold mb-6 text-gray-900">KNS Login</h1>
+        <div className="mb-6 flex items-center gap-2.5">
+          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent text-sm font-bold text-accent-foreground">
+            W
+          </div>
+          <div>
+            <h1 className="text-lg font-semibold leading-tight text-foreground">Wi Sabi</h1>
+            <p className="text-xs text-foreground-muted">Sign in to continue</p>
+          </div>
+        </div>
 
         {error && (
-          <div className="mb-4 text-sm text-red-600 bg-red-50 p-2 rounded">
-            {error}
+          <div className="mb-4 flex items-start gap-2 rounded-lg border border-danger-soft-border bg-danger-soft px-3 py-2 text-sm text-danger">
+            <AlertCircleIcon className="mt-0.5 h-4 w-4 shrink-0" />
+            <span>{error}</span>
           </div>
         )}
 
-        <label className="block text-sm text-gray-700 mb-1">Email</label>
+        <label htmlFor="email" className="mb-1 block text-sm font-medium text-foreground-muted">
+          Email
+        </label>
         <input
+          id="email"
           type="email"
           required
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="w-full border border-gray-300 rounded px-3 py-2 mb-4 text-gray-900"
+          className="mb-4 w-full rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground placeholder:text-foreground-subtle focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
         />
 
-        <label className="block text-sm text-gray-700 mb-1">Password</label>
+        <label htmlFor="password" className="mb-1 block text-sm font-medium text-foreground-muted">
+          Password
+        </label>
         <input
+          id="password"
           type="password"
           required
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="w-full border border-gray-300 rounded px-3 py-2 mb-6 text-gray-900"
+          className="mb-6 w-full rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground placeholder:text-foreground-subtle focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
         />
 
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-blue-600 text-white rounded py-2 font-medium disabled:opacity-50"
+          className="flex h-10 w-full items-center justify-center rounded-lg bg-accent text-sm font-medium text-accent-foreground transition-colors hover:bg-accent-hover disabled:cursor-not-allowed disabled:opacity-50"
         >
-          {loading ? "Logging in..." : "Log in"}
+          {loading ? "Logging in…" : "Log in"}
         </button>
       </form>
     </div>

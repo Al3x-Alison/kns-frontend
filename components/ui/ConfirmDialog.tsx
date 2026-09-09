@@ -23,9 +23,9 @@ export function ConfirmDialog({
 }) {
   return (
     <Modal title={title} onClose={onCancel}>
-      <p className="text-sm text-zinc-400">{message}</p>
+      <p className="text-sm text-foreground-muted">{message}</p>
       {error && (
-        <div className="mt-3 rounded-lg border border-red-900/50 bg-red-950/50 px-3 py-2 text-sm text-red-300">
+        <div className="mt-3 rounded-lg border border-danger-soft-border bg-danger-soft px-3 py-2 text-sm text-danger">
           {error}
         </div>
       )}
@@ -33,7 +33,7 @@ export function ConfirmDialog({
         <button
           type="button"
           onClick={onCancel}
-          className="rounded-lg border border-zinc-800 px-4 py-2 text-sm font-medium text-zinc-300 hover:bg-zinc-800"
+          className="rounded-lg border border-border px-4 py-2 text-sm font-medium text-foreground-muted hover:bg-surface-secondary"
         >
           Cancel
         </button>
@@ -41,8 +41,10 @@ export function ConfirmDialog({
           type="button"
           onClick={onConfirm}
           disabled={loading}
-          className={`rounded-lg px-4 py-2 text-sm font-medium text-white disabled:cursor-not-allowed disabled:opacity-50 ${
-            danger ? "bg-red-600 hover:bg-red-500" : "bg-indigo-500 hover:bg-indigo-400"
+          className={`rounded-lg px-4 py-2 text-sm font-medium disabled:cursor-not-allowed disabled:opacity-50 ${
+            danger
+              ? "bg-danger text-white hover:brightness-110"
+              : "bg-accent text-accent-foreground hover:bg-accent-hover"
           }`}
         >
           {loading ? "Please wait…" : confirmLabel}

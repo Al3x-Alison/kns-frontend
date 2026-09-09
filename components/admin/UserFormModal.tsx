@@ -6,8 +6,8 @@ import type { Role, User } from "@/lib/types";
 
 const ROLES: Role[] = ["admin", "uploader", "call_center"];
 const inputClass =
-  "w-full rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-2 text-sm text-zinc-100 placeholder:text-zinc-600 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500";
-const labelClass = "mb-1 block text-xs font-medium text-zinc-400";
+  "w-full rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground placeholder:text-foreground-subtle focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent";
+const labelClass = "mb-1 block text-xs font-medium text-foreground-muted";
 
 export function UserFormModal({
   mode,
@@ -64,7 +64,7 @@ export function UserFormModal({
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       {error && (
-        <div className="rounded-lg border border-red-900/50 bg-red-950/50 px-3 py-2 text-sm text-red-300">
+        <div className="rounded-lg border border-danger-soft-border bg-danger-soft px-3 py-2 text-sm text-danger">
           {error}
         </div>
       )}
@@ -92,7 +92,7 @@ export function UserFormModal({
 
       <div>
         <label className={labelClass}>
-          Password {mode === "edit" && <span className="text-zinc-600">(leave blank to keep current)</span>}
+          Password {mode === "edit" && <span className="text-foreground-subtle">(leave blank to keep current)</span>}
         </label>
         <input
           type="password"
@@ -119,12 +119,12 @@ export function UserFormModal({
       </div>
 
       {mode === "edit" && (
-        <label className="flex items-center gap-2 text-sm text-zinc-300">
+        <label className="flex items-center gap-2 text-sm text-foreground">
           <input
             type="checkbox"
             checked={isActive}
             onChange={(e) => setIsActive(e.target.checked)}
-            className="h-4 w-4 rounded border-zinc-700 bg-zinc-950 text-indigo-500 focus:ring-indigo-500"
+            className="h-4 w-4 rounded border-border-strong bg-background text-accent focus:ring-accent"
           />
           Active
         </label>
@@ -134,14 +134,14 @@ export function UserFormModal({
         <button
           type="button"
           onClick={onClose}
-          className="rounded-lg border border-zinc-800 px-4 py-2 text-sm font-medium text-zinc-300 hover:bg-zinc-800"
+          className="rounded-lg border border-border px-4 py-2 text-sm font-medium text-foreground-muted hover:bg-surface-secondary"
         >
           Cancel
         </button>
         <button
           type="submit"
           disabled={saving}
-          className="rounded-lg bg-indigo-500 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-400 disabled:cursor-not-allowed disabled:opacity-50"
+          className="rounded-lg bg-accent px-4 py-2 text-sm font-medium text-accent-foreground hover:bg-accent-hover disabled:cursor-not-allowed disabled:opacity-50"
         >
           {saving ? "Saving…" : mode === "add" ? "Create user" : "Save changes"}
         </button>

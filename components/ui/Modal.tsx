@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { XIcon } from "./icons";
 
 export function Modal({
   title,
@@ -27,17 +28,15 @@ export function Modal({
         onClick={onClose}
         className="fixed inset-0 bg-black/60 backdrop-blur-sm"
       />
-      <div className="relative w-full max-w-md rounded-2xl border border-zinc-800 bg-zinc-900 p-6 shadow-xl">
+      <div className="relative w-full max-w-md rounded-2xl border border-border bg-surface p-6 shadow-xl">
         <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-base font-semibold text-zinc-50">{title}</h2>
+          <h2 className="text-base font-semibold text-foreground">{title}</h2>
           <button
             onClick={onClose}
             aria-label="Close"
-            className="rounded-lg p-1 text-zinc-500 hover:bg-zinc-800 hover:text-zinc-200"
+            className="rounded-lg p-1 text-foreground-subtle hover:bg-surface-secondary hover:text-foreground"
           >
-            <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M6 6l12 12M18 6 6 18" />
-            </svg>
+            <XIcon className="h-5 w-5" />
           </button>
         </div>
         {children}

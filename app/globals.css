@@ -1,26 +1,153 @@
 @import "tailwindcss";
 
+/* Explicit class-based dark mode — driven by a `dark` class on <html>,
+   toggled in lib/theme.ts, not by prefers-color-scheme alone. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Neutral scale (zinc-based) */
+  --background: #fafafa;
+  --surface: #ffffff;
+  --surface-secondary: #f4f4f5;
+  --surface-hover: #e4e4e7;
+  --border: #e4e4e7;
+  --border-strong: #d4d4d8;
+  --foreground: #18181b;
+  --foreground-muted: #52525b;
+  --foreground-subtle: #a1a1aa;
+
+  /* Orange accent — deliberate use only: primary actions, active states,
+     key badges. Distinct fill vs. text tokens so on-light text still hits
+     AA contrast while buttons keep a punchy fill. */
+  --accent: #ea580c;
+  --accent-hover: #c2410c;
+  --accent-foreground: #ffffff;
+  --accent-text: #c2410c;
+  --accent-soft: #ffedd5;
+  --accent-soft-border: #fdba74;
+
+  /* Semantic status colors */
+  --success: #059669;
+  --success-soft: #d1fae5;
+  --success-soft-border: #6ee7b7;
+  --warning: #b45309;
+  --warning-soft: #fef3c7;
+  --warning-soft-border: #fcd34d;
+  --danger: #dc2626;
+  --danger-soft: #fee2e2;
+  --danger-soft-border: #fca5a5;
+  --info: #0369a1;
+  --info-soft: #e0f2fe;
+  --info-soft-border: #7dd3fc;
+}
+
+:root:not([data-theme="light"]) {
+  @media (prefers-color-scheme: dark) {
+    --background: #09090b;
+    --surface: #18181b;
+    --surface-secondary: #27272a;
+    --surface-hover: #3f3f46;
+    --border: #27272a;
+    --border-strong: #3f3f46;
+    --foreground: #fafafa;
+    --foreground-muted: #a1a1aa;
+    --foreground-subtle: #71717a;
+
+    --accent: #f97316;
+    --accent-hover: #fb923c;
+    --accent-foreground: #18181b;
+    --accent-text: #fb923c;
+    --accent-soft: #431407;
+    --accent-soft-border: #9a3412;
+
+    --success: #34d399;
+    --success-soft: #052e21;
+    --success-soft-border: #065f46;
+    --warning: #fbbf24;
+    --warning-soft: #3f2d05;
+    --warning-soft-border: #92400e;
+    --danger: #f87171;
+    --danger-soft: #3f0d0d;
+    --danger-soft-border: #991b1b;
+    --info: #38bdf8;
+    --info-soft: #052e3f;
+    --info-soft-border: #075985;
+  }
+}
+
+.dark {
+  --background: #09090b;
+  --surface: #18181b;
+  --surface-secondary: #27272a;
+  --surface-hover: #3f3f46;
+  --border: #27272a;
+  --border-strong: #3f3f46;
+  --foreground: #fafafa;
+  --foreground-muted: #a1a1aa;
+  --foreground-subtle: #71717a;
+
+  --accent: #f97316;
+  --accent-hover: #fb923c;
+  --accent-foreground: #18181b;
+  --accent-text: #fb923c;
+  --accent-soft: #431407;
+  --accent-soft-border: #9a3412;
+
+  --success: #34d399;
+  --success-soft: #052e21;
+  --success-soft-border: #065f46;
+  --warning: #fbbf24;
+  --warning-soft: #3f2d05;
+  --warning-soft-border: #92400e;
+  --danger: #f87171;
+  --danger-soft: #3f0d0d;
+  --danger-soft-border: #991b1b;
+  --info: #38bdf8;
+  --info-soft: #052e3f;
+  --info-soft-border: #075985;
 }
 
 @theme inline {
   --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-secondary: var(--surface-secondary);
+  --color-surface-hover: var(--surface-hover);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
   --color-foreground: var(--foreground);
+  --color-foreground-muted: var(--foreground-muted);
+  --color-foreground-subtle: var(--foreground-subtle);
+
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent-text: var(--accent-text);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-soft-border: var(--accent-soft-border);
+
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+  --color-success-soft-border: var(--success-soft-border);
+  --color-warning: var(--warning);
+  --color-warning-soft: var(--warning-soft);
+  --color-warning-soft-border: var(--warning-soft-border);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-danger-soft-border: var(--danger-soft-border);
+  --color-info: var(--info);
+  --color-info-soft: var(--info-soft);
+  --color-info-soft-border: var(--info-soft-border);
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+* {
+  scrollbar-color: var(--border-strong) transparent;
 }

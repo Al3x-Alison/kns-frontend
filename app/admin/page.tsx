@@ -10,6 +10,7 @@ import { Modal } from "@/components/ui/Modal";
 import { apiErrorMessage, apiFetch, getToken } from "@/lib/api";
 import { getSelfIdentifiers } from "@/lib/jwt";
 import type { User } from "@/lib/types";
+import { AlertCircleIcon, PlusIcon } from "@/components/ui/icons";
 
 type Tab = "users" | "chat";
 
@@ -68,14 +69,14 @@ function AdminPageContent() {
   return (
     <div className="flex h-full flex-col p-4 md:p-8">
       <div className="mb-6 flex items-center justify-between">
-        <h1 className="text-xl font-semibold text-zinc-50">Admin</h1>
-        <div className="flex gap-1 rounded-lg border border-zinc-800 bg-zinc-900 p-1">
+        <h1 className="text-xl font-semibold text-foreground">Admin</h1>
+        <div className="flex gap-1 rounded-lg border border-border bg-surface p-1">
           {(["users", "chat"] as Tab[]).map((t) => (
             <button
               key={t}
               onClick={() => setTab(t)}
               className={`rounded-md px-3 py-1.5 text-sm font-medium capitalize transition-colors ${
-                tab === t ? "bg-indigo-500 text-white" : "text-zinc-400 hover:text-zinc-200"
+                tab === t ? "bg-accent text-accent-foreground" : "text-foreground-muted hover:text-foreground"
               }`}
             >
               {t === "users" ? "User management" : "AI chat"}
@@ -89,14 +90,16 @@ function AdminPageContent() {
           <div className="mb-4 flex justify-end">
             <button
               onClick={() => setModal({ mode: "add" })}
-              className="rounded-lg bg-indigo-500 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-400"
+              className="flex items-center gap-1.5 rounded-lg bg-accent px-4 py-2 text-sm font-medium text-accent-foreground hover:bg-accent-hover"
             >
+              <PlusIcon className="h-4 w-4" />
               Add user
             </button>
           </div>
 
           {error && (
-            <div className="mb-4 rounded-lg border border-red-900/50 bg-red-950/50 px-3 py-2 text-sm text-red-300">
+            <div className="mb-4 flex items-center gap-2 rounded-lg border border-danger-soft-border bg-danger-soft px-3 py-2 text-sm text-danger">
+              <AlertCircleIcon className="h-4 w-4 shrink-0" />
               {error}
             </div>
           )}
@@ -104,7 +107,7 @@ function AdminPageContent() {
           {loading ? (
             <div className="space-y-2">
               {Array.from({ length: 4 }).map((_, i) => (
-                <div key={i} className="h-12 animate-pulse rounded-xl bg-zinc-900" />
+                <div key={i} className="h-12 animate-pulse rounded-xl bg-surface-secondary" />
               ))}
             </div>
           ) : (
@@ -112,7 +115,7 @@ function AdminPageContent() {
           )}
         </div>
       ) : (
-        <div className="min-h-0 flex-1 rounded-xl border border-zinc-800">
+        <div className="min-h-0 flex-1 rounded-xl border border-border">
           <ChatPanel />
         </div>
       )}
